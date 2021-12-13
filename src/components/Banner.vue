@@ -92,9 +92,9 @@
                   <li class="quick-view">
                     <router-link to="/product">+ Quick View</router-link>
                   </li>
-                  <li class="w-icon">
+                  <!-- <li class="w-icon">
                     <a href="#"><i class="fa fa-random"></i></a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
               <div class="pi-text">
