@@ -11,6 +11,16 @@ use App\Models\ProductGallery;
 class ProductController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -100,6 +110,8 @@ class ProductController extends Controller
     {
         $item = Product::findOrFail($id);
         $item->delete();
+
+        ProductGallery::where('products_id', $id)->delete();
 
         return redirect()->route('products.index');
     }

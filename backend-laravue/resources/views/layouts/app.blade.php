@@ -10,7 +10,10 @@
 
     <title>@yield('title')</title>
 
+    {{-- Style --}}
+    @stack('before-style')
     @include('includes.style')
+    @stack('after-style')
 </head>
 
 <body>
@@ -27,8 +30,10 @@
     </div>
     <!-- /#right-panel -->
 
-
+    {{-- Script --}}
+    @stack('before-script')
     @include('includes.script')
+    @stack('after-script')
 </body>
 
 </html>

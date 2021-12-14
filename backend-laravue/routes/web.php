@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductGalleryController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,14 @@ use App\Http\Controllers\ProductGalleryController;
 */
 
 // route dashboard
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('products', ProductController::class)->middleware('auth');
+Route::resource('products', ProductController::class);
 Route::get('products/{id}/gallery', [ProductController::class, 'gallery'])->name('products.gallery');
-Route::resource('product-galleries', ProductGalleryController::class)->middleware('auth');
+Route::resource('product-galleries', ProductGalleryController::class);
+Route::resource('transactions', TransactionController::class);
+Route::get('transactions/{id}/set-status', [TransactionController::class, 'setStatus'])
+    ->name('transactions.status');
 
 Auth::routes(['register' => false]);
 

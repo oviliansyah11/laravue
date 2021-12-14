@@ -17,7 +17,10 @@
                 </a>
 
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="{{route('logout')}}"><i class="fa fa-power -off"></i>Logout</a>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Logout</button>
+                    </form>
                 </div>
             </div>
 
