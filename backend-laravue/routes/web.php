@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+// route dashboard
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
-Auth::routes();
+Route::resource('products', ProductController::class)->middleware('auth');
+Route::get('products/{id}/gallery', [ProductController::class, 'gallery'])->name('products.gallery');
+Route::resource('product-galleries', ProductGalleryController::class)->middleware('auth');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['register' => false]);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
