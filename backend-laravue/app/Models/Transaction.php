@@ -17,6 +17,7 @@ class Transaction extends Model
         'number',
         'address',
         'transaction_total',
+        'transaction_status',
     ];
     protected $hidden = [];
 
