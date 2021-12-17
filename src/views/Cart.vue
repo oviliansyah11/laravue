@@ -33,29 +33,24 @@
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
+                    <tbody v-if="cartUser.length > 0">
+                      <tr v-for="item in cartUser" :key="item.id">
                         <td class="cart-pic first-row">
-                          <img src="img/cart-page/product-1.jpg" />
+                          <img :src="item.photo" />
                         </td>
                         <td class="cart-title first-row text-center">
-                          <h5>Pure Pineapple</h5>
+                          <h5>{{ item.name }}</h5>
                         </td>
-                        <td class="p-price first-row">$60.00</td>
-                        <td class="delete-item">
-                          <a href="#"><i class="material-icons"> close </i></a>
+                        <td class="p-price first-row">{{ item.price }}</td>
+                        <td class="si-close" @click="removeItem(cartUser.id)">
+                          <i class="ti-close" style="cursor: pointer"></i>
                         </td>
                       </tr>
+                    </tbody>
+                    <tbody v-else>
                       <tr>
-                        <td class="cart-pic first-row">
-                          <img src="img/cart-page/product-1.jpg" />
-                        </td>
-                        <td class="cart-title first-row text-center">
-                          <h5>Pure Pineapple</h5>
-                        </td>
-                        <td class="p-price first-row">$60.00</td>
-                        <td class="delete-item">
-                          <a href="#"><i class="material-icons"> close </i></a>
+                        <td colspan="4" class="text-warning">
+                          <strong>Your cart is empty</strong>
                         </td>
                       </tr>
                     </tbody>
@@ -158,6 +153,27 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  data() {
+    return {
+      cartUser: [],
+    };
+  },
+  methods: {
+    removeItem(index) {
+      this.cartUser.splice(index, 1);
+      const parsed = JSON.stringify(this.cartUser);
+      localStorage.setItem("cartUser", parsed);
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("cartUser")) {
+      try {
+        this.cartUser = JSON.parse(localStorage.getItem("cartUser"));
+      } catch (e) {
+        localStorage.removeItem("cartUser");
+      }
+    }
   },
 };
 </script>
