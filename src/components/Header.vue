@@ -35,33 +35,26 @@
                 <div class="cart-hover">
                   <div class="select-items">
                     <table>
-                      <tbody>
-                        <tr>
+                      <tbody v-if="cartUser.length > 0">
+                        <tr v-for="item in cartUser" :key="item.id">
                           <td class="si-pic">
-                            <img src="img/select-product-1.jpg" alt="" />
+                            <img :src="item.photo" alt="" height="70px" />
                           </td>
                           <td class="si-text">
                             <div class="product-selected">
-                              <p>$60.00 x 1</p>
-                              <h6>Kabino Bedside Table</h6>
+                              <p>{{ item.price }} x 1</p>
+                              <h6>{{ item.name }}</h6>
                             </div>
                           </td>
                           <td class="si-close">
                             <i class="ti-close"></i>
                           </td>
                         </tr>
+                      </tbody>
+                      <tbody v-else>
                         <tr>
-                          <td class="si-pic">
-                            <img src="img/select-product-2.jpg" alt="" />
-                          </td>
-                          <td class="si-text">
-                            <div class="product-selected">
-                              <p>$60.00 x 1</p>
-                              <h6>Kabino Bedside Table</h6>
-                            </div>
-                          </td>
-                          <td class="si-close">
-                            <i class="ti-close"></i>
+                          <td class="text-center text-warning">
+                            <strong>Product is empty</strong>
                           </td>
                         </tr>
                       </tbody>
@@ -91,5 +84,19 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      cartUser: [],
+    };
+  },
+  mounted() {
+    if (localStorage.getItem("cartUser")) {
+      try {
+        this.cartUser = JSON.parse(localStorage.getItem("cartUser"));
+      } catch (e) {
+        localStorage.removeItem("cartUser");
+      }
+    }
+  },
 };
 </script>

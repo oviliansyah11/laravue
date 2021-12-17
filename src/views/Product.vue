@@ -63,7 +63,17 @@
                     <h4>${{ productDetails.price }}</h4>
                   </div>
                   <div class="quantity">
-                    <a href="shopping-cart.html" class="primary-btn pd-cart"
+                    <a
+                      @click="
+                        saveCart(
+                          productDetails.id,
+                          productDetails.name,
+                          productDetails.price,
+                          productDetails.galleries[0].photo
+                        )
+                      "
+                      href="#"
+                      class="primary-btn pd-cart"
                       >Add To Cart</a
                     >
                   </div>
@@ -100,6 +110,7 @@ export default {
     return {
       default_image: "",
       productDetails: [],
+      cartUser: [],
     };
   },
   methods: {
@@ -112,8 +123,26 @@ export default {
       this.productDetails = data;
       this.default_image = data.galleries[0].photo;
     },
+    saveCart(idProduct, nameProduct, priceProduct, photoProduct) {
+      let productStored = {
+        id: idProduct,
+        name: nameProduct,
+        price: priceProduct,
+        photo: photoProduct,
+      };
+      this.cartUser.push(productStored);
+      const parsed = JSON.stringify(this.cartUser);
+      localStorage.setItem("cartUser", parsed);
+    },
   },
   mounted() {
+    if (localStorage.getItem("cartUser")) {
+      try {
+        this.cartUser = JSON.parse(localStorage.getItem("cartUser"));
+      } catch (e) {
+        localStorage.removeItem("cartUser");
+      }
+    }
     axios
       .get("http://127.0.0.1:8000/api/products", {
         params: {
