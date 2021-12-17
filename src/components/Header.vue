@@ -30,7 +30,7 @@
                 Keranjang Belanja &nbsp;
                 <a href="#">
                   <i class="icon_bag_alt"></i>
-                  <span>3</span>
+                  <span>{{ cartUser.length }}</span>
                 </a>
                 <div class="cart-hover">
                   <div class="select-items">
@@ -46,7 +46,7 @@
                               <h6>{{ item.name }}</h6>
                             </div>
                           </td>
-                          <td class="si-close">
+                          <td class="si-close" @click="removeItem(cartUser.id)">
                             <i class="ti-close"></i>
                           </td>
                         </tr>
@@ -88,6 +88,13 @@ export default {
     return {
       cartUser: [],
     };
+  },
+  methods: {
+    removeItem(index) {
+      this.cartUser.splice(index, 1);
+      const parsed = JSON.stringify(this.cartUser);
+      localStorage.setItem("cartUser", parsed);
+    },
   },
   mounted() {
     if (localStorage.getItem("cartUser")) {

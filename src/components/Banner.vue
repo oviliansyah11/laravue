@@ -20,9 +20,9 @@
                 <img v-bind:src="item.galleries[0].photo" alt="" />
                 <ul>
                   <li class="w-icon active">
-                    <router-link to="/product"
-                      ><i class="icon_bag_alt"></i
-                    ></router-link>
+                    <router-link to="/product">
+                      <i class="icon_bag_alt"></i>
+                    </router-link>
                   </li>
                   <li class="quick-view">
                     <router-link v-bind:to="'/product/' + item.id"
