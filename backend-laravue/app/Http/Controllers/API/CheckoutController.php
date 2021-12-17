@@ -28,6 +28,7 @@ class CheckoutController extends Controller
 
         $transaction->details()->saveMany($details);
 
+
         return ResponseFormatter::success($transaction);
     }
 }
