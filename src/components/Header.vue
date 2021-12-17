@@ -1,18 +1,6 @@
 <template>
   <!-- Header Section Begin -->
   <header class="header-section">
-    <div class="header-top">
-      <div class="container">
-        <div class="ht-left">
-          <div class="mail-service">
-            <i class="fa fa-envelope"></i> hello.shayna@gmail.com
-          </div>
-          <div class="phone-service">
-            <i class="fa fa-phone"></i> +628 22081996
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="container">
       <div class="inner-header">
         <div class="row">
@@ -46,7 +34,7 @@
                               <h6>{{ item.name }}</h6>
                             </div>
                           </td>
-                          <td class="si-close" @click="removeItem(cartUser.id)">
+                          <td class="si-close" @click="removeItem(item.id)">
                             <i class="ti-close"></i>
                           </td>
                         </tr>
@@ -89,10 +77,17 @@ export default {
     };
   },
   methods: {
-    removeItem(index) {
+    removeItem(idx) {
+      let cartUserStorage = JSON.parse(localStorage.getItem("cartUser"));
+      let itemCartUserStorage = cartUserStorage.map(
+        (itemCartUserStorage) => itemCartUserStorage.id
+      );
+      let index = itemCartUserStorage.findIndex((id) => id == idx);
       this.cartUser.splice(index, 1);
+
       const parsed = JSON.stringify(this.cartUser);
       localStorage.setItem("cartUser", parsed);
+      window.location.reload();
     },
   },
   mounted() {

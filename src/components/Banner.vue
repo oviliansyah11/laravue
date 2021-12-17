@@ -90,6 +90,7 @@ export default {
       this.cartUser.push(productStored);
       const parsed = JSON.stringify(this.cartUser);
       localStorage.setItem("cartUser", parsed);
+      window.location.reload();
     },
   },
   mounted() {
@@ -98,6 +99,14 @@ export default {
       .then((res) => (this.products = res.data.data.data))
       //eslint-disable-next-line no-console
       .catch((err) => console.log(err));
+
+    if (localStorage.getItem("cartUser")) {
+      try {
+        this.cartUser = JSON.parse(localStorage.getItem("cartUser"));
+      } catch (e) {
+        localStorage.removeItem("cartUser");
+      }
+    }
   },
 };
 </script>
