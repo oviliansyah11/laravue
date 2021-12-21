@@ -193,7 +193,7 @@ export default {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/checkout", checkoutData)
+        .post("https://mysite-web.masuk.id/api/checkout", checkoutData)
         .then((response) => console.log(response))
         .catch((err) => {
           console.log(err);

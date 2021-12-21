@@ -147,7 +147,7 @@ export default {
       }
     }
     axios
-      .get("http://127.0.0.1:8000/api/products", {
+      .get("https://mysite-web.masuk.id/api/products", {
         params: {
           id: this.$route.params.id,
         },
