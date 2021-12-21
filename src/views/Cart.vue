@@ -214,7 +214,7 @@ export default {
     totalPrice() {
       return this.cartUser.reduce(function (items, data) {
         return items + data.price;
-      }, 0);
+      });
     },
     totalPax() {
       return (this.totalPrice * 10) / 100;
