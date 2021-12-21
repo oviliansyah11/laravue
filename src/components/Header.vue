@@ -6,18 +6,20 @@
         <div class="row">
           <div class="col-lg-2 col-md-2">
             <div class="logo">
-              <a href="./index.html">
-                <img src="img/logo_website_shayna.png" alt="" />
-              </a>
+              <router-link to="/">
+                <a href="#">
+                  <img src="img/logo.png" alt="" height="70px" />
+                </a>
+              </router-link>
             </div>
           </div>
           <div class="col-lg-7 col-md-7"></div>
           <div class="col-lg-3 text-right col-md-3">
             <ul class="nav-right">
               <li class="cart-icon">
-                Keranjang Belanja &nbsp;
+                Cart &nbsp;
                 <a href="#">
-                  <i class="icon_bag_alt"></i>
+                  <i class="fas fa-shopping-cart"></i>
                   <span>{{ cartUser.length }}</span>
                 </a>
                 <div class="cart-hover">
